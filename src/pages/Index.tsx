@@ -74,18 +74,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen gradient-bg">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-8">
-            <div className="p-4 rounded-2xl bg-card border-2 border-border mr-6">
-              <Music className="h-12 w-12 text-foreground" />
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="flex flex-col sm:flex-row items-center justify-center mb-6 sm:mb-8">
+            <div className="p-3 sm:p-4 rounded-2xl bg-card border-2 border-border mb-4 sm:mb-0 sm:mr-6">
+              <Music className="h-8 w-8 sm:h-12 sm:w-12 text-foreground" />
             </div>
-            <h1 className="text-6xl font-bold text-foreground tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground tracking-tight">
               SongTranscribe
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Transform any song into playable chords and sheet music using AI. 
             Upload audio files or paste YouTube/Spotify links for instant transcription.
           </p>
@@ -93,45 +93,47 @@ const Index = () => {
 
         {/* Main Content */}
         <div className="max-w-6xl mx-auto">
-          <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-12">
-            <TabsList className="grid w-full grid-cols-2 lg:w-1/2 mx-auto h-12">
-              <TabsTrigger value="upload" className="flex items-center gap-2 text-base">
-                <Upload className="h-4 w-4" />
-                Upload File
+          <Tabs value={currentTab} onValueChange={setCurrentTab} className="mb-8 sm:mb-12">
+            <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto h-10 sm:h-12">
+              <TabsTrigger value="upload" className="flex items-center gap-2 text-sm sm:text-base">
+                <Upload className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Upload File</span>
+                <span className="xs:hidden">Upload</span>
               </TabsTrigger>
-              <TabsTrigger value="url" className="flex items-center gap-2 text-base">
-                <Link className="h-4 w-4" />
-                From URL
+              <TabsTrigger value="url" className="flex items-center gap-2 text-sm sm:text-base">
+                <Link className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">From URL</span>
+                <span className="xs:hidden">URL</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="upload" className="mt-12">
+            <TabsContent value="upload" className="mt-8 sm:mt-12">
               <AudioUploader onFileUpload={handleFileUpload} isProcessing={isProcessing} />
             </TabsContent>
 
-            <TabsContent value="url" className="mt-12">
+            <TabsContent value="url" className="mt-8 sm:mt-12">
               <Card className="max-w-2xl mx-auto border-2">
                 <CardHeader className="text-center pb-4">
-                  <CardTitle className="flex items-center justify-center gap-3 text-2xl">
-                    <Link className="h-6 w-6" />
+                  <CardTitle className="flex items-center justify-center gap-3 text-xl sm:text-2xl">
+                    <Link className="h-5 w-5 sm:h-6 sm:w-6" />
                     Add Song URL
                   </CardTitle>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-sm sm:text-base">
                     Paste a YouTube or Spotify link to transcribe
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-4 sm:space-y-6">
                   <Input
                     type="url"
                     placeholder="https://youtube.com/watch?v=... or https://open.spotify.com/track/..."
                     value={audioUrl}
                     onChange={(e) => setAudioUrl(e.target.value)}
-                    className="h-12 text-base"
+                    className="h-10 sm:h-12 text-sm sm:text-base"
                   />
                   <Button 
                     onClick={() => handleUrlSubmit(audioUrl)}
                     disabled={isProcessing}
-                    className="w-full h-12 text-base font-medium"
+                    className="w-full h-10 sm:h-12 text-sm sm:text-base font-medium"
                     size="lg"
                   >
                     {isProcessing ? 'Processing...' : 'Transcribe Song'}
@@ -143,7 +145,7 @@ const Index = () => {
 
           {/* Audio Player */}
           {(audioFile || audioUrl) && (
-            <div className="mb-12">
+            <div className="mb-8 sm:mb-12">
               <AudioPlayer 
                 audioFile={audioFile} 
                 audioUrl={audioUrl}
@@ -154,10 +156,10 @@ const Index = () => {
 
           {/* Results */}
           {chords.length > 0 && (
-            <Tabs defaultValue="chords" className="space-y-8">
-              <TabsList className="grid w-full grid-cols-2 lg:w-1/2 mx-auto h-12">
-                <TabsTrigger value="chords" className="text-base">Chord Chart</TabsTrigger>
-                <TabsTrigger value="sheet" className="text-base">Sheet Music</TabsTrigger>
+            <Tabs defaultValue="chords" className="space-y-6 sm:space-y-8">
+              <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto h-10 sm:h-12">
+                <TabsTrigger value="chords" className="text-sm sm:text-base">Chord Chart</TabsTrigger>
+                <TabsTrigger value="sheet" className="text-sm sm:text-base">Sheet Music</TabsTrigger>
               </TabsList>
 
               <TabsContent value="chords">
