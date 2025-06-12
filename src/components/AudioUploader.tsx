@@ -26,13 +26,13 @@ const AudioUploader = ({ onFileUpload, isProcessing }: AudioUploaderProps) => {
 
   if (isProcessing) {
     return (
-      <Card className="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg border-white/20">
-        <CardContent className="p-12 text-center">
-          <Loader2 className="h-16 w-16 text-purple-300 mx-auto mb-6 animate-spin" />
-          <h3 className="text-2xl font-semibold text-white mb-2">
+      <Card className="max-w-2xl mx-auto border-2">
+        <CardContent className="p-16 text-center">
+          <Loader2 className="h-16 w-16 text-foreground mx-auto mb-8 animate-spin" />
+          <h3 className="text-3xl font-semibold text-foreground mb-4">
             Transcribing Your Song...
           </h3>
-          <p className="text-purple-200">
+          <p className="text-muted-foreground text-lg">
             Our AI is analyzing the audio and extracting chords and melodies. This may take a few moments.
           </p>
         </CardContent>
@@ -41,37 +41,37 @@ const AudioUploader = ({ onFileUpload, isProcessing }: AudioUploaderProps) => {
   }
 
   return (
-    <Card className="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg border-white/20">
-      <CardContent className="p-12">
+    <Card className="max-w-2xl mx-auto border-2">
+      <CardContent className="p-16">
         <div
           {...getRootProps()}
           className={`
-            border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition-colors
+            border-2 border-dashed rounded-xl p-16 text-center cursor-pointer transition-all duration-200
             ${isDragActive 
-              ? 'border-purple-400 bg-purple-500/20' 
-              : 'border-purple-300 hover:border-purple-400 hover:bg-purple-500/10'
+              ? 'border-foreground bg-accent scale-[1.02]' 
+              : 'border-border hover:border-foreground hover:bg-accent/50'
             }
           `}
         >
           <input {...getInputProps()} />
-          <div className="space-y-4">
+          <div className="space-y-6">
             {isDragActive ? (
-              <Upload className="h-16 w-16 text-purple-300 mx-auto animate-bounce" />
+              <Upload className="h-20 w-20 text-foreground mx-auto animate-bounce" />
             ) : (
-              <Music className="h-16 w-16 text-purple-300 mx-auto" />
+              <Music className="h-20 w-20 text-foreground mx-auto" />
             )}
             
             <div>
-              <h3 className="text-2xl font-semibold text-white mb-2">
+              <h3 className="text-3xl font-semibold text-foreground mb-4">
                 {isDragActive ? 'Drop your audio file here' : 'Upload Audio File'}
               </h3>
-              <p className="text-purple-200 mb-4">
+              <p className="text-muted-foreground mb-6 text-lg">
                 {isDragActive 
                   ? 'Release to upload your song'
                   : 'Drag & drop your audio file here, or click to browse'
                 }
               </p>
-              <p className="text-sm text-purple-300">
+              <p className="text-sm text-muted-foreground font-medium">
                 Supports MP3, WAV, M4A, FLAC, AAC
               </p>
             </div>
